@@ -1,0 +1,160 @@
+<html>
+    <title>AMP Private Beta</title>
+    <link rel="stylesheet" href="/styles.css">
+    <h1>awes145's Mission Pack - Private Beta</h1>
+    <p>This page is intended for those who already have an access code.</p>
+    <p>If you don't have one yet, please request one through <a href="https://forms.gle/i7LSQFn3Urne27L67">this form</a>.</p>
+    
+    <div class="form-container">
+        <form id="accessForm">
+            <label for="access_code">Access Code:</label>
+            <input type="text" id="access_code" name="access_code" required placeholder="">
+            <input type="submit" value="Submit">
+        </form>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        // valid hashes
+        const VALID_CODES = [
+            '4967f97927625ab9a6497c75050e26c3c8396ed099e464a0153a8ae4785db0e2', // i'm aboutta revoke this one, explained later
+            '9af477ad99a14a8ee3f2e757b0090e84a8a98702bc09951250fbb6a4b70e3d4c', 
+            '23bae516c45e8a09dc0dd18e29caf6c88c725a8b43680f62bd83d2f248191787',
+            '70d360959ab8ccf1df9d9c9944ee2bc55c768eaaf481db51a05cdeafb5083e5a',
+            '558288de28dc03c15ea00c7c1632f28095f3acd811af1172c6f5d905fab1d4d1',
+            '7782a4034ad331793c8fdc83caf296d7f6afbafa38996b8e7894b5ed78700cb9',
+            '23c520b54afb5ca25f3b9d96bb21a7108fbb0de70e6313b8b85e0b686996cf9d',
+            'eaf5a7b3a0173a63612e76e012500295ce7afb821d03c2666c89905b1b8cb1b7',
+            '75cc803dda0ed4b05008d58c88505f928031c156b93b223991c0fd9f6c629e86',
+            'b8abd23e4c0fda39425f17f18b13791a840840141e3248853b9d4df6699c35dd',
+            '1725a85f226d242c6ec92cc93c0b1e17dc2325af635ee323785e9e62e1cef737',
+            'b7b4548e513f247357817bcfe015a779a4853453c0f27e391cf950d88d8ba7d8',
+            '8c47a782d6901781a9dce8fde08826b53eab328d52b76190e647d24b74774b7e',
+            '7c346b182e780549b16138d92b2101594a497d43746608f2c9b7dc3db36bedc1',
+            '7b4b6511ed0775c61eb64f0d8c0ef97105a090d7c5b22e9a814beddd8eb9ab2d',
+            '2b922679004c1a5fe1d9685e70082dc157f585a1159961c6b4b44f920ee5a33a',
+            'd629e14120ab2067933955c4ced790205f4c835a082118568c0cfb1bbdf76c14',
+            'f1dd01b0d8bbf3b56b674402c95a2a47ef8de68393ec3ec63901ee71df7ef130',
+            '8b4bc33986a14eac25f4d3e7693adc05f9de0a0418c522daa6dbd5877499e598',
+            '3633d0ad74fbceb815893922ec7ce3970d97c9fccaf3a65f67493826ee95a66c',
+            '998a53d66c65ba41312053b9071d47dd9987eb472a913213ca97bbf6e19a6103',
+            '68535ff74ff892c7b6ae674665b4acc383ac160450d1334b39ba57bd76b2ef65',
+            '8bb76981510999e427515c4b9196a4b88e3dee588720806b8d320797ef2d7adc',
+            'e1df8de6f61c7879f9b2e32ce23044974cf96048e2986719ec957f8257887244',
+            '093a904862bdbd684aaa43ae61541eda62485592d9006713e9baa867b94293a9',
+            'dce45b9558b9755bbcd05eac2ec0c2e96d7bd3eedaad367ddbb9c8d8fda236ec',
+            '49e19d9077a0a805291b8eb3d08d412b0afcc4627e2a22641ecbc416f775b2ca',
+            '28b131f892d6241773fd7bb2708c1783aeae47fa806e1695c59c8530672aeacb',
+            '6f37c0616c7e3b42a39693c2a3b3a950426930cc949b3a2b2bdcf5f3ebce067d',
+            '057cc72dd1a00bd53f988df17e0567d6df00fe4c065a69c0ac4db99c7767ed43',
+            '60c0a40e1f888c6860d2fb5651ddd5b4102c6f52e01a8d93673402a07218e2a6',
+            'd74b1af607c6d8735c566d8fe477c5443ca990450fab519565a910547374d3e1',
+            '18848bd3303c874460f8efa978b614bddfe1017d198941ccb52a5d19e7f3bf86',
+            '808a888d50a166febf83541572146fc0d1744069591bbbc9c450e6690ebdd0cf',
+            '6bcba835fc0846db724fbaa53992d0711a2603343b76c883ebcc764b0f9dfdbf',
+            '42f8b37e6a8295d07fbd6cfdfec02b0449b1f9cf4ca45fb087e0597a395b4702',
+            'ba8137ee375e41729b177b2441a2f77cb7f91939eef55ac773b747e2459d3a06',
+            'c8bee0da65502ed2667f54a1f0b99d34af9b9c9334fd3592e5606b30e79f7218',
+            '13845fab930e1f273695f79afdf9b4b92a67d47c631456e93488f2bd277d1054',
+            'fe28bd366aa16ebb904f705e40a930dc9abffb2a0081933f2ae996d729779997',
+            '87d90c9a80b7921e90405496113e1fc72d602ecb724c8faf2781e247217b57f8',
+            'b572b4834a5ee156617d8c55c4bbc26c6ecabc16b6db757167da3558e5d4df65',
+            '43f94074e9db8e5ee43b8df84c86c9ec42e548b5cc9ea45131de40c34a904c3a',
+            'c520f2276c0e299cdf3a2946230b0067b154b734e2f801cf16fdaedee8821166',
+            '3a43f8b7d9840ddfd2946224bd267e66a405516e8c07491d4d7a82bdda906f34',
+            '4defa7ac70aa22b27131640dff8d3dc92742bc70f954a3ed89f0ca397f14dfb2',
+            '992505d92d395a78ed3026cfd88c0a6f7d300f6902539afdd57b2bcbfd59d772',
+            'a6cd57dd8e3f65b187913c95bc704a5c3ba7b5e7004f2874cb5da3fb08ddd735',
+            '537b03a114e86ed19b242a40a854f745d3327d365380c69e23b5ca0b8b244fa4',
+            '901a410a915123d316f9eb080a50d441dd3813ba35d585ffbd4da854063bedd8',
+            'b11e4e4f8731d81415489470bc85da917962740afee243cb1dfb5e86e858c775' // egg
+        ];
+
+        // sha256sum function
+        async function sha256(str) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(str);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            return hashHex;
+        }
+
+        document.getElementById('accessForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const messageDiv = document.getElementById('message');
+            const codeInput = document.getElementById('access_code');
+            const enteredCode = codeInput.value.trim();
+            
+            try {
+                // make hash
+                const hashedCode = await sha256(enteredCode);
+                
+                // check the hash
+                if (VALID_CODES.includes(hashedCode)) {
+                    messageDiv.className = 'message success';
+                    
+                    // check for egg
+                    if (hashedCode === 'b11e4e4f8731d81415489470bc85da917962740afee243cb1dfb5e86e858c775') {
+                        messageDiv.textContent = 'out of all the things you coulda typed...';
+                    } else {
+                        messageDiv.textContent = 'Working...';
+                    }
+                    
+                    // start download
+                    setTimeout(() => {
+                        triggerDownload();
+                    }, 500);
+                } else {
+                    messageDiv.className = 'message error';
+                    const revokedCodes = [
+                        '4967f97927625ab9a6497c75050e26c3c8396ed099e464a0153a8ae4785db0e2'
+                    ];
+                    if (revokedCodes.includes(hashedCode)) {
+                        messageDiv.textContent = 'This code has been revoked.';
+                        // funny story
+                        // earlier this year i met this guy
+                        // we became friends and i gave him a code to test my mod
+                        // he tested it, complimented it, yada whatever
+                        // ...then he showed me his save slots in the game, in each row was a letter to build a racial slur
+                        // THEN, because he sits next to me on the bus, i look over and see him watching some random twitch stream...
+                        // this wasn't any stream, it was a guy that's REALLY racist... he's dressed like a clown and there's a huge swastika in the background
+                        // he's then talking to people on omegle about how much he hates people of color
+                        // and THEN on top of that he changes all his SM profile pictures to this guy (confederate flag in bg, clown)
+                        // he still thinks we're friends. i'm just leaving him alone so he figures it out himself.
+                        // his profiles are changed to praise this 'gypsy crusader' guy
+                    } else {
+                        const errorMessages = [
+                            'No.',
+                            'Hey, you\'re just SO off base!',
+                            'You know, I once typed that myself when I was your age.',
+                            'Yeah... right.',
+                            'You must like this page a lot.',
+                            'Close, but not close enough.',
+                            'I sent you that code, by the way.',
+                            'I\'m sure you just misplaced that code...',
+                            'Dude.',
+                            'Maybe try turning off caps lock?',
+                            'Hm.',
+                            'I surely must have sent you the wrong one!',
+                            'Oho you missed that one. Try another!'
+                        ];
+                        const randomMessage = errorMessages[Math.floor(Math.random() * errorMessages.length)];
+                        messageDiv.textContent = randomMessage;
+                    }
+                    codeInput.value = '';
+                }
+            } catch (error) {
+                messageDiv.className = 'message error';
+                messageDiv.textContent = 'Something happened.';
+            }
+        });
+
+        function triggerDownload() {
+            // give zip
+            const _url = atob('aHR0cHM6Ly9maWxlLmdhcmRlbi9ZdHhSbC1nSGtXVmtmUHM3L0FNUHJlbGVhc2VzL2FtcDIwYi0xMjUyNjE0MjUxMi56aXA=');
+            window.open(_url);
+        }
+    </script>
+</html>

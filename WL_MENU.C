@@ -953,8 +953,8 @@ firstpart:
 				if (!EpisodeSelect[which/2])
 				{
 					SD_PlaySound (NOWAYSND);
-					Message("This episode is not\n
-							ready yet!");
+					Message("This episode is not\n"
+							"ready yet!");
 					IN_ClearKeysDown();
 					IN_Ack();
 					DrawNewEpisode();

@@ -39,7 +39,7 @@
 dirtype dirtable[9] = {northwest,north,northeast,west,nodir,east,
 	southwest,south,southeast};
 
-int	starthitpoints[5][NUMENEMIES] =
+int	starthitpoints[4][NUMENEMIES] =
 	 //
 	 // BABY MODE
 	 //

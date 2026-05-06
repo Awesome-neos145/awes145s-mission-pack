@@ -1462,7 +1462,7 @@ void Quit (char *error)
 =====================
 */
 
-static  char *ParmStrings[] = {"baby","easy","normal","hard","nightmare",""};
+static  char *ParmStrings[] = {"baby","easy","normal","hard",""};
 
 void    DemoLoop (void)
 {

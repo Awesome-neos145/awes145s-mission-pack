@@ -444,7 +444,7 @@ void	TakeDamage (int points,objtype *attacker)
 	else
 		StatusDrawPic (17,4,PAIN1PIC+((100-displayhealth)/16));
 	facecount = 0;
-	// ...and have him like this for a good half second
+	// ...and have him like this for a good split second
 	// MAKE BJ'S EYES BUG IF MAJOR DAMAGE!
 	//
 	#ifdef SPEAR

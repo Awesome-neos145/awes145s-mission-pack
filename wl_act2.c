@@ -858,6 +858,8 @@ extern	statetype s_bossshoot5;
 extern	statetype s_bossshoot6;
 extern	statetype s_bossshoot7;
 extern	statetype s_bossshoot8;
+extern	statetype s_bossshoot9;
+extern  statetype s_bossshoot10;
 
 
 statetype s_bossstand	= {false,SPR_BOSS_W1,0,T_Stand,NULL,&s_bossstand};
@@ -874,14 +876,16 @@ statetype s_bossdie2	= {false,SPR_BOSS_DIE2,15,NULL,NULL,&s_bossdie3};
 statetype s_bossdie3	= {false,SPR_BOSS_DIE3,15,NULL,NULL,&s_bossdie4};
 statetype s_bossdie4	= {false,SPR_BOSS_DEAD,0,NULL,NULL,&s_bossdie4};
 
-statetype s_bossshoot1 	= {false,SPR_BOSS_SHOOT1,30,NULL,NULL,&s_bossshoot2};
+statetype s_bossshoot1 	= {false,SPR_BOSS_SHOOT1,10,NULL,NULL,&s_bossshoot2};
 statetype s_bossshoot2 	= {false,SPR_BOSS_SHOOT2,10,NULL,T_Shoot,&s_bossshoot3};
 statetype s_bossshoot3 	= {false,SPR_BOSS_SHOOT3,10,NULL,T_Shoot,&s_bossshoot4};
 statetype s_bossshoot4 	= {false,SPR_BOSS_SHOOT2,10,NULL,T_Shoot,&s_bossshoot5};
 statetype s_bossshoot5 	= {false,SPR_BOSS_SHOOT3,10,NULL,T_Shoot,&s_bossshoot6};
 statetype s_bossshoot6 	= {false,SPR_BOSS_SHOOT2,10,NULL,T_Shoot,&s_bossshoot7};
 statetype s_bossshoot7 	= {false,SPR_BOSS_SHOOT3,10,NULL,T_Shoot,&s_bossshoot8};
-statetype s_bossshoot8 	= {false,SPR_BOSS_SHOOT1,10,NULL,NULL,&s_bosschase1};
+statetype s_bossshoot8 	= {false,SPR_BOSS_SHOOT2,10,NULL,T_Shoot,&s_bossshoot9};
+statetype s_bossshoot9 	= {false,SPR_BOSS_SHOOT3,10,NULL,T_Shoot,&s_bossshoot10};
+statetype s_bossshoot10	= {false,SPR_BOSS_SHOOT1,10,NULL,NULL,&s_bosschase1};
 
 
 //

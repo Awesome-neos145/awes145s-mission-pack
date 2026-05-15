@@ -2164,8 +2164,6 @@ extern	statetype s_needle2;
 extern	statetype s_needle3;
 extern	statetype s_needle4;
 
-extern	statetype s_schabbdeathcam;
-
 
 statetype s_schabbstand	= {false,SPR_SCHABB_W1,0,T_Stand,NULL,&s_schabbstand};
 
@@ -2175,8 +2173,6 @@ statetype s_schabbchase2 	= {false,SPR_SCHABB_W2,8,T_Schabb,NULL,&s_schabbchase3
 statetype s_schabbchase3 	= {false,SPR_SCHABB_W3,10,T_Schabb,NULL,&s_schabbchase3s};
 statetype s_schabbchase3s	= {false,SPR_SCHABB_W3,3,NULL,NULL,&s_schabbchase4};
 statetype s_schabbchase4 	= {false,SPR_SCHABB_W4,8,T_Schabb,NULL,&s_schabbchase1};
-
-statetype s_schabbdeathcam	= {false,SPR_SCHABB_W1,1,NULL,NULL,&s_schabbdie1};
 
 statetype s_schabbdie1	= {false,SPR_SCHABB_W1,10,NULL,A_DeathScream,&s_schabbdie2};
 statetype s_schabbdie2	= {false,SPR_SCHABB_W1,10,NULL,NULL,&s_schabbdie3};
@@ -2221,8 +2217,6 @@ extern	statetype s_needle2;
 extern	statetype s_needle3;
 extern	statetype s_needle4;
 
-extern	statetype s_giftdeathcam;
-
 extern	statetype s_boom1;
 extern	statetype s_boom2;
 extern	statetype s_boom3;
@@ -2236,8 +2230,6 @@ statetype s_giftchase2 	= {false,SPR_GIFT_W2,8,T_Gift,NULL,&s_giftchase3};
 statetype s_giftchase3 	= {false,SPR_GIFT_W3,10,T_Gift,NULL,&s_giftchase3s};
 statetype s_giftchase3s	= {false,SPR_GIFT_W3,3,NULL,NULL,&s_giftchase4};
 statetype s_giftchase4 	= {false,SPR_GIFT_W4,8,T_Gift,NULL,&s_giftchase1};
-
-statetype s_giftdeathcam	= {false,SPR_GIFT_W1,1,NULL,NULL,&s_giftdie1};
 
 statetype s_giftdie1	= {false,SPR_GIFT_W1,1,NULL,A_DeathScream,&s_giftdie2};
 statetype s_giftdie2	= {false,SPR_GIFT_W1,10,NULL,NULL,&s_giftdie3};
@@ -2281,8 +2273,6 @@ extern	statetype s_needle2;
 extern	statetype s_needle3;
 extern	statetype s_needle4;
 
-extern	statetype s_fatdeathcam;
-
 
 statetype s_fatstand	= {false,SPR_FAT_W1,0,T_Stand,NULL,&s_fatstand};
 
@@ -2292,8 +2282,6 @@ statetype s_fatchase2 	= {false,SPR_FAT_W2,8,T_Fat,NULL,&s_fatchase3};
 statetype s_fatchase3 	= {false,SPR_FAT_W3,10,T_Fat,NULL,&s_fatchase3s};
 statetype s_fatchase3s	= {false,SPR_FAT_W3,3,NULL,NULL,&s_fatchase4};
 statetype s_fatchase4 	= {false,SPR_FAT_W4,8,T_Fat,NULL,&s_fatchase1};
-
-statetype s_fatdeathcam	= {false,SPR_FAT_W1,1,NULL,NULL,&s_fatdie1};
 
 statetype s_fatdie1	= {false,SPR_FAT_W1,1,NULL,A_DeathScream,&s_fatdie2};
 statetype s_fatdie2	= {false,SPR_FAT_W1,10,NULL,NULL,&s_fatdie3};
@@ -2871,8 +2859,6 @@ extern	statetype s_hitlershoot4;
 extern	statetype s_hitlershoot5;
 extern	statetype s_hitlershoot6;
 
-extern	statetype s_hitlerdeathcam;
-
 statetype s_mechastand	= {false,SPR_MECHA_W1,0,T_Stand,NULL,&s_mechastand};
 
 statetype s_mechachase1 	= {false,SPR_MECHA_W1,10,T_Chase,A_MechaSound,&s_mechachase1s};
@@ -2901,8 +2887,6 @@ statetype s_hitlerchase2 	= {false,SPR_HITLER_W2,2,T_Chase,NULL,&s_hitlerchase3}
 statetype s_hitlerchase3 	= {false,SPR_HITLER_W3,6,T_Chase,NULL,&s_hitlerchase3s};
 statetype s_hitlerchase3s	= {false,SPR_HITLER_W3,4,NULL,NULL,&s_hitlerchase4};
 statetype s_hitlerchase4 	= {false,SPR_HITLER_W4,2,T_Chase,NULL,&s_hitlerchase1};
-
-statetype s_hitlerdeathcam	= {false,SPR_HITLER_W1,10,NULL,NULL,&s_hitlerdie1};
 
 statetype s_hitlerdie1	= {false,SPR_HITLER_W1,1,NULL,A_DeathScream,&s_hitlerdie2};
 statetype s_hitlerdie2	= {false,SPR_HITLER_W1,10,NULL,NULL,&s_hitlerdie3};
@@ -3993,23 +3977,7 @@ void	A_StartDeathCam (objtype *ob)
 	bufferofs = temp;
 
 	fizzlein = true;
-	switch (ob->obclass)
-	{
-#ifndef SPEAR
-	case schabbobj:
-		NewState (ob,&s_schabbdeathcam);
-		break;
-	case realhitlerobj:
-		NewState (ob,&s_hitlerdeathcam);
-		break;
-	case giftobj:
-		NewState (ob,&s_giftdeathcam);
-		break;
-	case fatobj:
-		NewState (ob,&s_fatdeathcam);
-		break;
-#endif
-	}
+
 
 }
 

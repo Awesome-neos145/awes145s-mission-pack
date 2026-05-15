@@ -1293,10 +1293,7 @@ extern	statetype s_mutpain1;
 
 extern	statetype s_deathcam;
 
-extern	statetype s_schabbdeathcam2;
-extern	statetype s_hitlerdeathcam2;
-extern	statetype s_giftdeathcam2;
-extern	statetype s_fatdeathcam2;
+
 
 void SpawnStand (enemy_t which, int tilex, int tiley, int dir);
 void SpawnPatrol (enemy_t which, int tilex, int tiley, int dir);

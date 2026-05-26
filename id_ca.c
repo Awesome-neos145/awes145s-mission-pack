@@ -105,13 +105,6 @@ huffnode	*grhuffman;
 huffnode	grhuffman[255];
 #endif
 
-#ifdef AUDIOHEADERLINKED
-huffnode	*audiohuffman;
-#else
-huffnode	audiohuffman[255];
-#endif
-
-
 int			grhandle;		// handle to EGAGRAPH
 int			maphandle;		// handle to MAPTEMP / GAMEMAPS
 int			audiohandle;	// handle to AUDIOT / AUDIO

@@ -57,11 +57,11 @@ static	boolean		US_Started;
 		HighScore	Scores[MaxScores] =
 					{
 						{"Awesome_neos145",500000,1},
-						{"HGS",500000,1},
-						{"Tredman",450000,1},
-						{"Johnny",300000,1},
-						{"Sparky",67676,1},
-						{"Jennifer",11037,1},
+						{"HGS",450000,1},
+						{"JackfeldSeinfeld",300000,1},
+						{"Johnny",250000,1},
+						{"Sparky",200000,1},
+						{"Jennifer",150000,1},
 						{"Todmeister",0,1}, // hey tommy, go fuck yourself
 					};
 

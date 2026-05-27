@@ -34,3 +34,5 @@ typedef enum {
 		H_LEFTWINDOWPIC,             // 27
 		H_RIGHTWINDOWPIC,            // 28
 		H_BOTTOMINFOPIC,             // 29
+
+		// yeah this thing is really mangled for some reason, but seeing as i'm not building for shareware, i'm not sure i really care either

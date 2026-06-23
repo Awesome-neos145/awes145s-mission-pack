@@ -2336,7 +2336,7 @@ void SpawnSchabbs (int tilex, int tiley)
 
 	new->obclass = schabbobj;
 	new->hitpoints = starthitpoints[gamestate.difficulty][en_schabbs];
-	new->dir = south;
+	new->dir = nodir;
 	new->flags |= FL_SHOOTABLE|FL_AMBUSH;
 	if (!loadedgame)
 	  gamestate.killtotal++;

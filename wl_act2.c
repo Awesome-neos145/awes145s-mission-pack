@@ -49,7 +49,7 @@ int	starthitpoints[4][NUMENEMIES] =
 	  100,	// SS
 	  1,	// dogs
 	  3400,	// Olaf
-	  1700,	// Again, Olaf
+	  6800,	// Again, Olaf
 	  200,	// fake hitler
 	  4000,	// mecha hitler
 	  45,	// mutants
@@ -76,7 +76,7 @@ int	starthitpoints[4][NUMENEMIES] =
 	  100,	// SS
 	  1,	// dogs
 	  3800,	// Olaf
-	  2000,	// Holy moly its Olaf again
+	  7200,	// Holy moly its Olaf again
 	  200,	// fake hitler
 	  4200,	// mecha hitler
 	  55,	// mutants
@@ -104,7 +104,7 @@ int	starthitpoints[4][NUMENEMIES] =
 	  1,	// dogs
 
 	  4250,	// Olaf
-	  2400,	// I Can't Believe It's Olaf
+	  8050,	// I Can't Believe It's Olaf
 	  200,	// fake hitler
 	  4500,	// mecha hitler
 
@@ -133,7 +133,7 @@ int	starthitpoints[4][NUMENEMIES] =
 	  1,	// dogs
 
 	  4800,	// Olaf
-	  2700,	// Mega Fuckin Olaf
+	  8500,	// Mega Fuckin Olaf
 	  400,	// fake hitler
 	  5500,	// mecha hitler
 
@@ -2158,6 +2158,10 @@ extern	statetype s_schabbdie6;
 
 extern	statetype s_schabbshoot1;
 extern	statetype s_schabbshoot2;
+extern	statetype s_schabbshoot3;
+extern	statetype s_schabbshoot4;
+extern  statetype s_schabbshoot5;
+extern  statetype s_schabbshoot6;
 
 extern	statetype s_needle1;
 extern	statetype s_needle2;
@@ -2182,7 +2186,11 @@ statetype s_schabbdie5	= {false,SPR_SCHABB_DIE3,10,NULL,NULL,&s_schabbdie6};
 statetype s_schabbdie6	= {false,SPR_SCHABB_DEAD,20,NULL,A_InstantVictory,&s_schabbdie6};
 
 statetype s_schabbshoot1 	= {false,SPR_SCHABB_SHOOT1,30,NULL,NULL,&s_schabbshoot2};
-statetype s_schabbshoot2 	= {false,SPR_SCHABB_SHOOT2,10,NULL,T_SchabbThrow,&s_schabbchase1};
+statetype s_schabbshoot2 	= {false,SPR_SCHABB_SHOOT2,10,NULL,T_SchabbThrow,&s_schabbshoot3};
+statetype s_schabbshoot3 	= {false,SPR_SCHABB_SHOOT3,10,NULL,T_SchabbThrow,&s_schabbshoot4};
+statetype s_schabbshoot4 	= {false,SPR_SCHABB_SHOOT2,10,NULL,T_SchabbThrow,&s_schabbshoot5};
+statetype s_schabbshoot5 	= {false,SPR_SCHABB_SHOOT3,10,NULL,T_SchabbThrow,&s_schabbshoot6};
+statetype s_schabbshoot6 	= {false,SPR_SCHABB_SHOOT2,10,NULL,T_SchabbThrow,&s_schabbchase1};
 
 statetype s_needle1 	= {false,SPR_HYPO1,6,T_Projectile,NULL,&s_needle2};
 statetype s_needle2 	= {false,SPR_HYPO2,6,T_Projectile,NULL,&s_needle3};
@@ -2211,6 +2219,10 @@ extern	statetype s_giftdie6;
 
 extern	statetype s_giftshoot1;
 extern	statetype s_giftshoot2;
+extern	statetype s_giftshoot3;
+extern	statetype s_giftshoot4;
+extern	statetype s_giftshoot5;
+extern	statetype s_giftshoot6;
 
 extern	statetype s_needle1;
 extern	statetype s_needle2;
@@ -2238,8 +2250,12 @@ statetype s_giftdie4	= {false,SPR_GIFT_DIE2,10,NULL,NULL,&s_giftdie5};
 statetype s_giftdie5	= {false,SPR_GIFT_DIE3,10,NULL,NULL,&s_giftdie6};
 statetype s_giftdie6	= {false,SPR_GIFT_DEAD,20,NULL,NULL,&s_giftdie6};
 
-statetype s_giftshoot1 	= {false,SPR_GIFT_SHOOT1,30,NULL,NULL,&s_giftshoot2};
-statetype s_giftshoot2 	= {false,SPR_GIFT_SHOOT2,10,NULL,T_GiftThrow,&s_giftchase1};
+statetype s_giftshoot1 	= {false,SPR_GIFT_SHOOT1,20,NULL,T_GiftThrow,&s_giftshoot2};
+statetype s_giftshoot2 	= {false,SPR_GIFT_SHOOT2,20,NULL,T_GiftThrow,&s_giftshoot3};
+statetype s_giftshoot3 	= {false,SPR_GIFT_SHOOT1,20,NULL,T_GiftThrow,&s_giftshoot4};
+statetype s_giftshoot4 	= {false,SPR_GIFT_SHOOT2,10,NULL,T_Shoot,&s_giftshoot5};
+statetype s_giftshoot5 	= {false,SPR_GIFT_SHOOT1,10,NULL,T_Shoot,&s_giftshoot6};
+statetype s_giftshoot6 	= {false,SPR_GIFT_SHOOT2,10,NULL,T_Shoot,&s_giftchase1};
 
 
 //
@@ -2417,12 +2433,12 @@ void T_SchabbThrow (objtype *ob)
 	new->obclass = needleobj;
 	new->dir = nodir;
 	new->angle = iangle;
-	new->speed = 0x2000l;
+	new->speed = 0x4000l;
 
 	new->flags = FL_NONMARK;
 	new->active = true;
 
-	PlaySoundLocActor (SCHABBSTHROWSND,new);
+	PlaySoundLocActor (ATKMACHINEGUNSND,new);
 }
 
 /*
@@ -3610,6 +3626,8 @@ void T_Shoot (objtype *ob)
 	   break;
 #ifndef SPEAR
 	 case giftobj:
+	   PlaySoundLocActor(BOSSFIRESND,ob);
+	   break;
 	 case fatobj:
 	   PlaySoundLocActor(MISSILEFIRESND,ob);
 	   break;
@@ -3878,6 +3896,7 @@ boolean	CheckPosition (objtype *ob)
 #pragma argsused
 void A_InstantVictory (objtype *ob)
 {
+	VW_WaitVBL (100);
 	playstate = ex_victorious;
 }
 

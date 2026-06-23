@@ -56,8 +56,8 @@ static	boolean		US_Started;
 		SaveGame	Games[MaxSaveGames];
 		HighScore	Scores[MaxScores] =
 					{
-						{"Awesome_neos145",500000,1},
-						{"HGS",450000,1},
+						{"awes145",500000,1},
+						{"RGS",450000,1},
 						{"JackfeldSeinfeld",300000,1},
 						{"Johnny",250000,1},
 						{"Sparky",200000,1},

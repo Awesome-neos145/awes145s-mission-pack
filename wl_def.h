@@ -487,11 +487,14 @@ enum	{
 //
 // extras
 //
-	SPR_STOVE_1,SPR_BROWNPILL,
+	SPR_STOVE_1,SPR_BROWNPILL,SPR_SCHABB_SHOOT3,
 	
 		};
 // fun fact: with my episode 2 selection sprite, i actually scared myself
 // this was actually in earlier versions... please ignore
+
+// note as of 6/22/26:
+// i have to make my enemies harder to achieve my ulterior dreams
 
 /*
 =============================================================================

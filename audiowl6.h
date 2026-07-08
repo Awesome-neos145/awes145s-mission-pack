@@ -30,7 +30,7 @@ typedef enum {
         DEATHSCREAM3SND,			 // 25
         ATKMACHINEGUNSND,			 // 26
         HITENEMYSND,			 // 27
-        SHOOTDOORSND,			 // 28
+        SHOOTDOORSND,			 // should be 'SPEARSNAPSND' but we're not ready for that yet...
         DEATHSCREAM1SND,			 // 29
         GETMACHINESND,			 // 30
         GETAMMOSND,			 // 31

@@ -395,10 +395,11 @@ void	LatchNumber (int x, int y, int width, long number)
 
 void	DrawHealth (void)
 {
-	int displayhealth = gamestate.health;
-	if (displayhealth > 100)
-		displayhealth = 100;
-	LatchNumber (21,16,3,displayhealth);
+	LatchNumber (21,16,3,gamestate.health);
+	// hahah funny story
+	// i don't need to rely on displayhealth at ALL for this function
+	// drawing faces and drawing health are two totally different things
+	// only now am i getting my head outta my ass
 }
 
 

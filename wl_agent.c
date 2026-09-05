@@ -674,9 +674,6 @@ void GiveWeapon (int weapon)
 // flamethrower is selected, it shows fuel
 // rocket launcher shows... rockets
 // otherwise it shows regular ammo
-// i will mention this however: there is a bug where running out of bullets will switch to the knife
-// and still show the other (?) ammo counts
-// i don't know because this game is fucking crashing
 void	DrawAmmo (void)
 {
 	if (gamestate.weapon == wp_rocket)
@@ -765,12 +762,20 @@ void GetBonus (statobj_t *check)
 		break;
 
 	case	bo_key1:
-	case	bo_key2:
-	case	bo_key3:
-	case	bo_key4:
 		GiveKey (check->itemnumber - bo_key1);
 		SD_PlaySound (GETKEYSND);
-		GetMessage("Got a key.");
+		GetMessage("Picked up a gold key.");
+		break;
+	case	bo_key2:
+		GiveKey (check->itemnumber - bo_key1);
+		SD_PlaySound (GETKEYSND);
+		GetMessage("Picked up a blue key.");
+		break;
+	case	bo_key3: // these keys are likely leftovers from the Catacomb 3D engine, and it seems id never bothered to remove them lol
+	case	bo_key4: // furthermore proof that wolf3d is a child of C3D
+		GiveKey (check->itemnumber - bo_key1);
+		SD_PlaySound (GAMEOVERSND);
+		GetMessage("Unknown key!");
 		break;
 
 	case	bo_cross:
@@ -840,7 +845,7 @@ void GetBonus (statobj_t *check)
 	case	bo_machinegun:
 		SD_PlaySound (GETMACHINESND);
 		GiveWeapon (wp_machinegun);
-		GetMessage("Got a Machine Gun.");
+		GetMessage("Got a Machine Gun!");
 		DrawAmmo ();
 		break;
 	case	bo_chaingun:
@@ -874,7 +879,7 @@ void GetBonus (statobj_t *check)
 		gamestate.rockets += 8;
 		if (gamestate.rockets > gamestate.maxrockets)
 			gamestate.rockets = gamestate.maxrockets;
-		GetMessage("Got a rocket box."); // not making singular rockets like in DOOM
+		GetMessage("Got a rocket box.");
 		DrawAmmo ();
 		break;
 	case	bo_fuel:
@@ -937,7 +942,7 @@ void GetBonus (statobj_t *check)
 		GetMessage("Feasted on a dead body."); // good god bro
 		break;
 
-		case	bo_bandolier:
+	case	bo_bandolier:
 		if (gamestate.maxammo == 299)
 			return;
 
@@ -1093,6 +1098,7 @@ void ClipMove (objtype *ob, long xmove, long ymove)
 		// technically this code is in spear, but disabled anyway
 		// the walls draw ugly when you walk through them too...
 		// however seeing this is the point as one of my levels idk if my point is valid
+		// ignore upper comment that was an insanely terrible level idea
 
 	ob->x = basex+xmove;
 	ob->y = basey;
@@ -1168,25 +1174,35 @@ void Thrust (int angle, long speed)
 
 	offset = farmapylookup[player->tiley]+player->tilex;
 	player->areanumber = *(mapsegs[0] + offset) -AREATILE;
+	// i should honestly wrap these in braces
 
-	if (*(mapsegs[1] + offset) == EXITTILE)
+	if (*(mapsegs[1] + offset) == EXITTILE) {
 		VictoryTile ();
-	if (*(mapsegs[1] + offset) == WARPEASTTILE)
+	}
+	if (*(mapsegs[1] + offset) == WARPEASTTILE) {
 		WarpPlayer (EAST);
-	if (*(mapsegs[1] + offset) == WARPWESTTILE)
+	}
+	if (*(mapsegs[1] + offset) == WARPWESTTILE) {
 		WarpPlayer (WEST);
-	if (*(mapsegs[1] + offset) == WARPNORTHTILE)
+	}
+	if (*(mapsegs[1] + offset) == WARPNORTHTILE) {
 		WarpPlayer (NORTH);
-	if (*(mapsegs[1] + offset) == WARPSOUTHTILE)
+	}
+	if (*(mapsegs[1] + offset) == WARPSOUTHTILE) {
 		WarpPlayer (SOUTH);
-	if (*(mapsegs[1] + offset) == TRUCKONETILE)
+	}
+	if (*(mapsegs[1] + offset) == TRUCKONETILE) {
 		InstWarpPlayer (WARONE);
-	if (*(mapsegs[1] + offset) == TRUCKTWOTILE)
+	}
+	if (*(mapsegs[1] + offset) == TRUCKTWOTILE) {
 		InstWarpPlayer (WARTWO);
-	if (*(mapsegs[1] + offset) == TRUCKTHREETILE)
+	}
+	if (*(mapsegs[1] + offset) == TRUCKTHREETILE) {
 		InstWarpPlayer (WARTHR);
-	if (*(mapsegs[1] + offset) == TRUCKFOURTILE)
+	}
+	if (*(mapsegs[1] + offset) == TRUCKFOURTILE) {
 		InstWarpPlayer (WARFOU);
+	}
 	if (*(mapsegs[1] + offset) == SPEARTELETILE) // i sometimes wonder if this is the main culprit for the freezing
 	{
 		spearx = player->x;

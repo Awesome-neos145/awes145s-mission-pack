@@ -1652,6 +1652,6 @@ void main (void)
 
 	DemoLoop();
 
-	Quit("You shouldn't be here...");
+	Quit("Demoloop failed");
 }
 

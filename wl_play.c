@@ -1198,9 +1198,10 @@ void UpdatePaletteShifts (void)
 		if (damagecount < 0)
 			damagecount = 0;
 	}
-	else
+	else {
 		red = 0;
-
+	}
+	#ifdef BLOODEYES
 	// the blood from your eyes makes things red
 	if (!red && gamestate.health > 0)
 	{
@@ -1209,7 +1210,8 @@ void UpdatePaletteShifts (void)
 		else if (gamestate.health <= 20)
 			red = 1;		// getting weaker
 	}
-
+	#endif
+	
 	if (red)
 	{
 		VW_WaitVBL(1);
